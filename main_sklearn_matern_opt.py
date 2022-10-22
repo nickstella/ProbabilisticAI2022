@@ -36,6 +36,8 @@ class Model(object):
         self.rng = np.random.default_rng(seed=0)
 
         # TODO: Add custom initialization for your model here if necessary
+        
+        # uncomment your kernel
 
         ### Matern kernel ###
 
