@@ -160,9 +160,9 @@ class Model(object):
             f_var = f_preds.variance
             f_covar = f_preds.covariance_matrix
 
-        predictions = y_preds.mean.numpy()
-        gp_mean = f_preds.mean.detach().numpy()
-        gp_std = np.sqrt(f_var.detach().numpy())
+        predictions = y_preds.mean.numpy() # predictions sampled from posterior
+        gp_mean = f_preds.mean.detach().numpy() # mean of posterior
+        gp_std = np.sqrt(f_var.detach().numpy()) # std of posterior
 
         return predictions, gp_mean, gp_std
 
