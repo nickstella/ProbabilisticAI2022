@@ -1,2 +1,4 @@
 # ProbabilisticAI2022
-Project works for the Probabilistic Artificial Intelligence course held at ETH Zurich.
+to read:
+* https://ekamperi.github.io/machine%20learning/2021/06/11/acquisition-functions.html
+* chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.cs.princeton.edu/~rpa/pubs/gelbart2014constraints.pdf
