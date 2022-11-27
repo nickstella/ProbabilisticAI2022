@@ -6,6 +6,8 @@ from scipy.optimize import fmin_l_bfgs_b
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import Matern, WhiteKernel, ConstantKernel, Sum, Product
 from warnings import catch_warnings, simplefilter
+import warnings
+warnings.filterwarnings('ignore')
 
 domain = np.array([[0, 5]])
 SAFETY_THRESHOLD = 1.2
@@ -50,7 +52,7 @@ class BO_algo():
         self.gpucb_kappa = 1.2
         self.j_rec = 0
         self.rec_warmup = 3
-        self.trade_off = 0.01  # 0.01
+        self.trade_off = 0.01#.05  # 0.01
         self.x_train = []
         self.f_train = []
         self.v_train = []
@@ -124,8 +126,8 @@ class BO_algo():
 
         # TODO: enter your code here
 
-        eps = 0.0001
-        # x = x + eps * np.random.rand()     #uncomment for eps greedy solution
+        eps = 0.01
+        #x = x + eps * np.random.rand()     # uncomment for eps greedy solution
 
         mu_f, sigma_f = self.f_map.predict([x], return_std=True)
         mu_v, sigma_v = self.v_map.predict([x], return_std=True)
@@ -168,6 +170,8 @@ class BO_algo():
         x_train = np.transpose(np.atleast_2d(self.past_points[:, 0]))
         f_train = np.transpose(np.atleast_2d(self.past_points[:, 1]))
         v_train = np.transpose(np.atleast_2d(self.past_points[:, 2]))
+        self.f_map.fit(x_train, f_train)
+        self.v_map.fit(x_train, v_train)
 
         # TODO: enter your code here
         # raise NotImplementedError
@@ -183,7 +187,7 @@ class BO_algo():
 
         # TODO: enter your code here
 
-        filter = (self.past_points[:, 2] > SAFETY_THRESHOLD + 0.01)#self.trade_off)
+        filter = (self.past_points[:, 2] > SAFETY_THRESHOLD + 0)#self.trade_off)
         sol = self.past_points[filter]
 
         try:
